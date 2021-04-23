@@ -2,7 +2,6 @@ package com.ibooking.Model;
 
 public class RoomModel implements RoomInterface
 {
-    //-ROOM_TABLE [id, RoomType, RoomNumber, Capacity, boolean isAvailable]
     private int id;
     private String roomType;
     private int roomNumber;
@@ -10,7 +9,9 @@ public class RoomModel implements RoomInterface
     private double price;
     private boolean isAvailable;
 
-    //constructor
+    /**
+     * Constructs a RoomModel object with ID, RoomType, RoomNumber, Capacity, Price, isAvailable
+     */
     public RoomModel(int id, String roomType, int roomNumber, int capacity, double price, boolean isAvailable) {
         this.id = id;
         this.roomType = roomType;
@@ -20,7 +21,9 @@ public class RoomModel implements RoomInterface
         this.isAvailable = isAvailable;
     }
 
-    // toString
+    /**
+     * @return a String representation of RoomModel object
+     */
     @Override
     public String toString() {
         return "RoomModel{" +
@@ -31,6 +34,16 @@ public class RoomModel implements RoomInterface
                 ", Price = $" + price +
                 ", IsAvailable = " + isAvailable +
                 '}';
+    }
+
+    /**
+     * Add an extra service to the room reservation using Decorator Design Pattern
+     * @param room the target room
+     * @param newService the extra service to add
+     */
+    public RoomInterface addService(RoomInterface room, Service newService)
+    {
+        return room = new RoomExtraService(room, newService);
     }
 
     public int getId() {
@@ -81,5 +94,32 @@ public class RoomModel implements RoomInterface
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    // UNIT TEST : TEST addService()
+    public static void main(String[] args)
+    {
+        RoomInterface r1 = new RoomModel(1, "Double", 12, 2, 100, true);
+        r1 = r1.addService(r1, Service.GYM);
+        System.out.println(r1.getRoomType());
+        System.out.println(r1.getPrice());
+
+        r1 = r1.addService(r1, Service.BREAKFAST);
+        System.out.println(r1.getRoomType());
+        System.out.println(r1.getPrice());
+
+        RoomInterface r2 = new RoomModel(2, "Triple", 122, 3, 150, true);
+
+        System.out.println(r2.getRoomType());
+        System.out.println(r2.getPrice());
+
+        /* Expected Output:
+            Double + GYM
+            110.0
+            Double + GYM + BREAKFAST
+            120.0
+            Triple
+            150.0
+         */
     }
 }

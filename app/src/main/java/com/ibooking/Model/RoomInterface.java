@@ -1,6 +1,11 @@
 package com.ibooking.Model;
 
 public interface RoomInterface {
-    double getPrice();
+    int getId();
     String getRoomType();
+    int getRoomNumber();
+    int getCapacity();
+    double getPrice();
+    boolean isAvailable();
+    RoomInterface addService(RoomInterface room, Service newService);
 }
