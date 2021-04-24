@@ -1,4 +1,6 @@
 package com.ibooking.Model;
 
-public class UserModel {
+public class UserModel
+{
+
 }
