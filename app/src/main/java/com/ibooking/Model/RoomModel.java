@@ -3,6 +3,7 @@ package com.ibooking.Model;
 public class RoomModel implements RoomInterface
 {
     private int id;
+    private int hotelId;
     private String roomType;
     private int roomNumber;
     private int capacity;
@@ -10,10 +11,11 @@ public class RoomModel implements RoomInterface
     private boolean isAvailable;
 
     /**
-     * Constructs a RoomModel object with ID, RoomType, RoomNumber, Capacity, Price, isAvailable
+     * Constructs a RoomModel object with ID, hotelId, RoomType, RoomNumber, Capacity, Price, isAvailable
      */
-    public RoomModel(int id, String roomType, int roomNumber, int capacity, double price, boolean isAvailable) {
+    public RoomModel(int id, int hotelId, String roomType, int roomNumber, int capacity, double price, boolean isAvailable) {
         this.id = id;
+        this.hotelId = hotelId;
         this.roomType = roomType;
         this.roomNumber = roomNumber;
         this.capacity = capacity;
@@ -28,6 +30,7 @@ public class RoomModel implements RoomInterface
     public String toString() {
         return "RoomModel{" +
                 "ID =" + id +
+                ", Hotel ID = '" + hotelId +
                 ", Room Type = '" + roomType +
                 ", Room Number = " + roomNumber +
                 ", Capacity = " + capacity +
@@ -52,6 +55,14 @@ public class RoomModel implements RoomInterface
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
     }
 
     @Override
@@ -97,9 +108,9 @@ public class RoomModel implements RoomInterface
     }
 
     // UNIT TEST : TEST addService()
-    public static void main(String[] args)
+ /*   public static void main(String[] args)
     {
-        RoomInterface r1 = new RoomModel(1, "Double", 12, 2, 100, true);
+        RoomInterface r1 = new RoomModel(1, 1,"Double", 12, 2, 100, true);
         r1 = r1.addService(r1, Service.GYM);
         System.out.println(r1.getRoomType());
         System.out.println(r1.getPrice());
@@ -108,11 +119,11 @@ public class RoomModel implements RoomInterface
         System.out.println(r1.getRoomType());
         System.out.println(r1.getPrice());
 
-        RoomInterface r2 = new RoomModel(2, "Triple", 122, 3, 150, true);
+        RoomInterface r2 = new RoomModel(2, 1,"Triple", 122, 3, 150, true);
 
         System.out.println(r2.getRoomType());
         System.out.println(r2.getPrice());
-
+*/
         /* Expected Output:
             Double + GYM
             110.0
@@ -120,6 +131,6 @@ public class RoomModel implements RoomInterface
             120.0
             Triple
             150.0
-         */
-    }
+
+    }*/
 }
