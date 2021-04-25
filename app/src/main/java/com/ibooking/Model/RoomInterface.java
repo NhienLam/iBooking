@@ -2,6 +2,7 @@ package com.ibooking.Model;
 
 public interface RoomInterface {
     int getId();
+    int getHotelId();
     String getRoomType();
     int getRoomNumber();
     int getCapacity();
