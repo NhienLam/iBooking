@@ -13,12 +13,12 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
 {
     public static final String ROOM_TABLE = "ROOM_TABLE";
     public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_HOTEL_ID = "HOTEL_ID";
     public static final String COLUMN_ROOM_TYPE = "ROOM_TYPE";
     public static final String COLUMN_ROOM_NUMBER = "ROOM_NUMBER";
     public static final String COLUMN_ROOM_CAPACITY = "ROOM_CAPACITY";
     public static final String COLUMN_ROOM_PRICE = "ROOM_PRICE";
     public static final String COLUMN_AVAILABLE_ROOM = "AVAILABLE_ROOM";
-    //-ROOM_TABLE [id, RoomType, RoomNumber, Capacity, Price, isAvailable]
 
     /**
      * Constructs a RoomDatabaseHelper
@@ -38,6 +38,7 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
     {
         String createTableStatement = "CREATE TABLE " + ROOM_TABLE + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_HOTEL_ID + " INT, "
                 + COLUMN_ROOM_TYPE + " TEXT, " + COLUMN_ROOM_NUMBER + " INT, "
                 + COLUMN_ROOM_CAPACITY + " INT, " + COLUMN_ROOM_PRICE + " DOUBLE, "
                 + COLUMN_AVAILABLE_ROOM + " BOOL)";
@@ -65,6 +66,7 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(COLUMN_HOTEL_ID, roomModel.getHotelId());
         cv.put(COLUMN_ROOM_TYPE, roomModel.getRoomType());
         cv.put(COLUMN_ROOM_NUMBER, roomModel.getRoomNumber());
         cv.put(COLUMN_ROOM_CAPACITY, roomModel.getCapacity());
@@ -102,6 +104,10 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         }
     }
 
+    /**
+     * Gets all rooms in the database
+     * @return all rooms in the database
+     */
     public List<RoomInterface> getAllRooms()
     {
         List<RoomInterface> returnList = new ArrayList<>();
@@ -117,13 +123,14 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
             // put them into the returnList
             do {
                 int roomID = cursor.getInt(0);
-                String roomType = cursor.getString(1);
-                int roomNumber = cursor.getInt(2);
-                int roomCapacity = cursor.getInt(3);
-                double roomPrice = cursor.getDouble(4);
-                boolean roomIsAvailable = cursor.getInt(5) == 1 ? true:false;
+                int hotelID = cursor.getInt(1);
+                String roomType = cursor.getString(2);
+                int roomNumber = cursor.getInt(3);
+                int roomCapacity = cursor.getInt(4);
+                double roomPrice = cursor.getDouble(5);
+                boolean roomIsAvailable = cursor.getInt(6) == 1 ? true:false;
 
-                RoomModel newRoom = new RoomModel(roomID, roomType, roomNumber, roomCapacity, roomPrice, roomIsAvailable);
+                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomNumber, roomCapacity, roomPrice, roomIsAvailable);
                 returnList.add(newRoom);
 
             } while(cursor.moveToNext());
@@ -139,6 +146,51 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         return returnList;
     }
 
+    // NEED TO DOUBLECHECK BACK IF IT WORKS PROPERLY
+    /**
+     * Gets all the rooms of a specific hotel
+     * aka gets all the rooms that have the same hotel id as the target hotelId
+     * @param hotelId a hotel id of the target hotel
+     * @return all the rooms of a target hotel
+     */
+    public List<RoomInterface> getAllRoomsByHotel(int hotelId)
+    {
+        List<RoomInterface> returnList = new ArrayList<>();
+        // get data from database
+        String queryString = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + " = " + hotelId;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if(cursor.moveToFirst())
+        {
+            // loop through cursor and create new RoomModel objects
+            // put them into the returnList
+            do {
+                int roomID = cursor.getInt(0);
+                int hotelID = cursor.getInt(1);
+                String roomType = cursor.getString(2);
+                int roomNumber = cursor.getInt(3);
+                int roomCapacity = cursor.getInt(4);
+                double roomPrice = cursor.getDouble(5);
+                boolean roomIsAvailable = cursor.getInt(6) == 1 ? true:false;
+
+                // put room to the returnList
+                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomNumber, roomCapacity, roomPrice, roomIsAvailable);
+                returnList.add(newRoom);
+
+            } while(cursor.moveToNext());
+        }
+        else
+        {
+            // Failure: do NOT add anything to the list
+        }
+
+        // close cursor and db when done
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 
     /**
      * Update roomModel isAvailable
