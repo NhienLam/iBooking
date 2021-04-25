@@ -30,8 +30,8 @@ public class RoomModel implements RoomInterface
     public String toString() {
         return "RoomModel{" +
                 "ID =" + id +
-                ", Hotel ID = '" + hotelId +
-                ", Room Type = '" + roomType +
+                ", Hotel ID = " + hotelId +
+                ", Room Type = " + roomType +
                 ", Room Number = " + roomNumber +
                 ", Capacity = " + capacity +
                 ", Price = $" + price +
