@@ -54,6 +54,11 @@ public class RoomExtraService implements RoomInterface
     }
 
     @Override
+    public int getHotelId() {
+        return room.getHotelId();
+    }
+
+    @Override
     public int getRoomNumber() {
         return room.getRoomNumber();
     }
