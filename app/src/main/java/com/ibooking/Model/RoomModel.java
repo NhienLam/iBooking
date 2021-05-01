@@ -2,22 +2,20 @@ package com.ibooking.Model;
 
 public class RoomModel implements RoomInterface
 {
-    private int id;
+    private int roomId;
     private int hotelId;
     private String roomType;
-    private int roomNumber;
     private int capacity;
     private double price;
     private boolean isAvailable;
 
     /**
-     * Constructs a RoomModel object with ID, hotelId, RoomType, RoomNumber, Capacity, Price, isAvailable
+     * Constructs a RoomModel object with roomId, hotelId, RoomType, Capacity, Price, isAvailable
      */
-    public RoomModel(int id, int hotelId, String roomType, int roomNumber, int capacity, double price, boolean isAvailable) {
-        this.id = id;
+    public RoomModel(int roomId, int hotelId, String roomType, int capacity, double price, boolean isAvailable) {
+        this.roomId = roomId;
         this.hotelId = hotelId;
         this.roomType = roomType;
-        this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.price = price;
         this.isAvailable = isAvailable;
@@ -29,10 +27,9 @@ public class RoomModel implements RoomInterface
     @Override
     public String toString() {
         return "RoomModel{" +
-                "ID =" + id +
-                ", Hotel ID = " + hotelId +
-                ", Room Type = " + roomType +
-                ", Room Number = " + roomNumber +
+                "Room ID =" + roomId +
+                ", Hotel ID = '" + hotelId +
+                ", Room Type = '" + roomType +
                 ", Capacity = " + capacity +
                 ", Price = $" + price +
                 ", IsAvailable = " + isAvailable +
@@ -49,12 +46,12 @@ public class RoomModel implements RoomInterface
         return room = new RoomExtraService(room, newService);
     }
 
-    public int getId() {
-        return id;
+    public int getRoomId() {
+        return roomId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     public int getHotelId() {
@@ -72,14 +69,6 @@ public class RoomModel implements RoomInterface
 
     public void setRoomType(String roomType) {
         this.roomType = roomType;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public int getCapacity() {
@@ -110,7 +99,7 @@ public class RoomModel implements RoomInterface
     // UNIT TEST : TEST addService()
  /*   public static void main(String[] args)
     {
-        RoomInterface r1 = new RoomModel(1, 1,"Double", 12, 2, 100, true);
+        RoomInterface r1 = new RoomModel(1, 1,"Double", 2, 100, true);
         r1 = r1.addService(r1, Service.GYM);
         System.out.println(r1.getRoomType());
         System.out.println(r1.getPrice());
@@ -119,7 +108,7 @@ public class RoomModel implements RoomInterface
         System.out.println(r1.getRoomType());
         System.out.println(r1.getPrice());
 
-        RoomInterface r2 = new RoomModel(2, 1,"Triple", 122, 3, 150, true);
+        RoomInterface r2 = new RoomModel(2, 1,"Triple", 3, 150, true);
 
         System.out.println(r2.getRoomType());
         System.out.println(r2.getPrice());
