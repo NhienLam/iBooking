@@ -12,10 +12,9 @@ import java.util.List;
 public class RoomDatabaseHelper extends SQLiteOpenHelper
 {
     public static final String ROOM_TABLE = "ROOM_TABLE";
-    public static final String COLUMN_ID = "ID";
+    public static final String COLUMN_ROOM_ID = "ROOM_ID";
     public static final String COLUMN_HOTEL_ID = "HOTEL_ID";
     public static final String COLUMN_ROOM_TYPE = "ROOM_TYPE";
-    public static final String COLUMN_ROOM_NUMBER = "ROOM_NUMBER";
     public static final String COLUMN_ROOM_CAPACITY = "ROOM_CAPACITY";
     public static final String COLUMN_ROOM_PRICE = "ROOM_PRICE";
     public static final String COLUMN_AVAILABLE_ROOM = "AVAILABLE_ROOM";
@@ -37,10 +36,11 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
     {
         String createTableStatement = "CREATE TABLE " + ROOM_TABLE + " ("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ROOM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_HOTEL_ID + " INT, "
-                + COLUMN_ROOM_TYPE + " TEXT, " + COLUMN_ROOM_NUMBER + " INT, "
-                + COLUMN_ROOM_CAPACITY + " INT, " + COLUMN_ROOM_PRICE + " DOUBLE, "
+                + COLUMN_ROOM_TYPE + " TEXT, "
+                + COLUMN_ROOM_CAPACITY + " INT, "
+                + COLUMN_ROOM_PRICE + " DOUBLE, "
                 + COLUMN_AVAILABLE_ROOM + " BOOL)";
 
         db.execSQL(createTableStatement);
@@ -68,7 +68,6 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
 
         cv.put(COLUMN_HOTEL_ID, roomModel.getHotelId());
         cv.put(COLUMN_ROOM_TYPE, roomModel.getRoomType());
-        cv.put(COLUMN_ROOM_NUMBER, roomModel.getRoomNumber());
         cv.put(COLUMN_ROOM_CAPACITY, roomModel.getCapacity());
         cv.put(COLUMN_ROOM_PRICE, roomModel.getPrice());
         cv.put(COLUMN_AVAILABLE_ROOM, roomModel.isAvailable());
@@ -90,7 +89,7 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
      */
     public boolean deleteRoom(RoomInterface roomModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + ROOM_TABLE + " WHERE " + COLUMN_ID + " = " + roomModel.getId();
+        String queryString = "DELETE FROM " + ROOM_TABLE + " WHERE " + COLUMN_ROOM_ID + " = " + roomModel.getRoomId();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -125,12 +124,11 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
                 int roomID = cursor.getInt(0);
                 int hotelID = cursor.getInt(1);
                 String roomType = cursor.getString(2);
-                int roomNumber = cursor.getInt(3);
-                int roomCapacity = cursor.getInt(4);
-                double roomPrice = cursor.getDouble(5);
-                boolean roomIsAvailable = cursor.getInt(6) == 1 ? true:false;
+                int roomCapacity = cursor.getInt(3);
+                double roomPrice = cursor.getDouble(4);
+                boolean roomIsAvailable = cursor.getInt(5) == 1 ? true:false;
 
-                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomNumber, roomCapacity, roomPrice, roomIsAvailable);
+                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomCapacity, roomPrice, roomIsAvailable);
                 returnList.add(newRoom);
 
             } while(cursor.moveToNext());
@@ -170,13 +168,12 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
                 int roomID = cursor.getInt(0);
                 int hotelID = cursor.getInt(1);
                 String roomType = cursor.getString(2);
-                int roomNumber = cursor.getInt(3);
-                int roomCapacity = cursor.getInt(4);
-                double roomPrice = cursor.getDouble(5);
-                boolean roomIsAvailable = cursor.getInt(6) == 1 ? true:false;
+                int roomCapacity = cursor.getInt(3);
+                double roomPrice = cursor.getDouble(4);
+                boolean roomIsAvailable = cursor.getInt(5) == 1 ? true:false;
 
                 // put room to the returnList
-                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomNumber, roomCapacity, roomPrice, roomIsAvailable);
+                RoomModel newRoom = new RoomModel(roomID, hotelID, roomType, roomCapacity, roomPrice, roomIsAvailable);
                 returnList.add(newRoom);
 
             } while(cursor.moveToNext());
@@ -204,12 +201,11 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_ROOM_TYPE, roomModel.getRoomType());
-        cv.put(COLUMN_ROOM_NUMBER, roomModel.getRoomNumber());
         cv.put(COLUMN_ROOM_CAPACITY, roomModel.getCapacity());
         cv.put(COLUMN_ROOM_PRICE, roomModel.getPrice());
         cv.put(COLUMN_AVAILABLE_ROOM, newIsAvailable);
 
-        long result = db.update(ROOM_TABLE, cv, COLUMN_ID + " = ?", new String[] {String.valueOf(roomModel.getId())} );
+        long result = db.update(ROOM_TABLE, cv, COLUMN_ROOM_ID + " = ?", new String[] {String.valueOf(roomModel.getRoomId())} );
         if(result == -1) {
             return false;
         }
@@ -230,12 +226,11 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_ROOM_TYPE, newType);
-        cv.put(COLUMN_ROOM_NUMBER, roomModel.getRoomNumber());
         cv.put(COLUMN_ROOM_CAPACITY, roomModel.getCapacity());
         cv.put(COLUMN_ROOM_PRICE, roomModel.getPrice());
         cv.put(COLUMN_AVAILABLE_ROOM, roomModel.isAvailable());
 
-        long result = db.update(ROOM_TABLE, cv, COLUMN_ID + " = ?", new String[] {String.valueOf(roomModel.getId())} );
+        long result = db.update(ROOM_TABLE, cv, COLUMN_ROOM_ID + " = ?", new String[] {String.valueOf(roomModel.getRoomId())} );
         if(result == -1) {
             return false;
         }
