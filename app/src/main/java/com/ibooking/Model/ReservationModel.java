@@ -7,7 +7,7 @@ import androidx.annotation.RequiresApi;
 import java.time.LocalDate;
 
 public class ReservationModel {
-    private String HotelAddress;
+    private int HotelId;
     private int id;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
@@ -15,13 +15,13 @@ public class ReservationModel {
     /**
      * Constructs a ReservationModel object with id, HotelAddress, checkInDate, checkOutDate
      */
-    public ReservationModel (int id, String HotelAddress, LocalDate checkInDate, LocalDate checkOutDate){
+    public ReservationModel (int id, int HotelId, LocalDate checkInDate, LocalDate checkOutDate){
         this.id = id;
-        this.HotelAddress = HotelAddress;
+        this.HotelId = HotelId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
     }
-    //RESERVATION_TABLE [HotelAddress, id, CheckinDate, CheckoutDate]
+    //RESERVATION_TABLE [HotelId, id, CheckinDate, CheckoutDate]
 
     public int getId() {
         return id;
@@ -31,12 +31,12 @@ public class ReservationModel {
         this.id = id;
     }
 
-    public String getHotelAddress() {
-        return HotelAddress;
+    public int getHotelId() {
+        return HotelId;
     }
 
-    public void setHotelAddress(String HotelAddress) {
-        this.HotelAddress = HotelAddress;
+    public void setHotelAddress(int HotelId) {
+        this.HotelId = HotelId;
     }
 
     public LocalDate getcheckInDate() {
@@ -61,7 +61,7 @@ public class ReservationModel {
     public String toString() {
         return "ReservationModel" +
                 "ID = " + id +
-                ", HotelAddress = '" + HotelAddress +
+                ", HotelId = '" + HotelId +
                 ", Check In Date = " + checkInDate +
                 ", Check Out Date = " + checkOutDate +
                 '}';
@@ -70,10 +70,10 @@ public class ReservationModel {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void main(String[] args)
     {
-        ReservationModel rev1 = new ReservationModel(1, "123 Baker Street, 123123", LocalDate.of(2021,12,12), LocalDate.of(2021,12,15));
+        ReservationModel rev1 = new ReservationModel(1, 15, LocalDate.of(2021,12,12), LocalDate.of(2021,12,15));
         System.out.println(rev1.toString());
     }
 
     //expected output
-    //ReservationModelID = 1, HotelAddress = '123 Baker Street, 123123, Check In Date = 2021-12-12, Check Out Date = 2021-12-15}
+    //ReservationModelID = 1, HotelAddress = 15, Check In Date = 2021-12-12, Check Out Date = 2021-12-15}
 }
