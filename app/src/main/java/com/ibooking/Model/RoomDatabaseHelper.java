@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,10 +156,16 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
     {
         List<RoomInterface> returnList = new ArrayList<>();
         // get data from database
-        String queryString = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + " = " + hotelId;
+       // String queryString = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + " = " + hotelId;
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {COLUMN_ROOM_ID, COLUMN_HOTEL_ID, COLUMN_ROOM_TYPE, COLUMN_ROOM_CAPACITY, COLUMN_ROOM_PRICE, COLUMN_AVAILABLE_ROOM};
+
+        qb.setTables(ROOM_TABLE);
+
+        Cursor cursor = qb.query(db, sqlSelect, COLUMN_HOTEL_ID + " = ?", new String[] {String.valueOf(hotelId)},null,null,null);
 
         if(cursor.moveToFirst())
         {
