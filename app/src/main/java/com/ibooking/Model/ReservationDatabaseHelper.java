@@ -9,7 +9,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import static java.time.LocalDate.*;
 public class ReservationDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String RESERVATION_TABLE = "RESERVATION_TABLE";
-    private static final String COLUMN_HOTEL_ADDRESS = "COLUMN_HOTEL_ADDRESS";
+    private static final String COLUMN_HOTEL_ID = "COLUMN_HOTEL_ID";
     public static final String COLUMN_ID = "COLUMN_ID";
     private static final String COLUMN_CHECKIN_DATE = "COLUMN_CHECKIN_DATE";
     private static final String COLUMN_CHECKOUT_DATE = "COLUMN_CHECKOUT_DATE";
@@ -34,7 +33,7 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + RESERVATION_TABLE + " (" + COLUMN_ID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_HOTEL_ADDRESS
+        String createTableStatement = "CREATE TABLE " + RESERVATION_TABLE + " (" + COLUMN_ID + " INTERGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_HOTEL_ID
                 + " TEXT, " + COLUMN_CHECKIN_DATE + " TEXT, " + COLUMN_CHECKOUT_DATE + " TEXT)";
 
         db.execSQL(createTableStatement);
@@ -57,7 +56,7 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_HOTEL_ADDRESS, reservationModel.getHotelAddress());
+        cv.put(COLUMN_HOTEL_ID, reservationModel.getHotelId());
         String date1 = reservationModel.getcheckInDate().toString();
         cv.put(COLUMN_CHECKIN_DATE, date1);
         String date2 = reservationModel.getcheckOutDate().toString();
@@ -105,13 +104,13 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
         {
             do {
                 int id = cursor.getInt(0);
-                String HotelAddress = cursor.getString(1);
+                int HotelId = cursor.getInt(1);
                 String checkin = cursor.getString(2);
                 LocalDate checkinDate = parse(checkin);
                 String checkout = cursor.getString(3);
                 LocalDate checkoutDate = parse(checkout);
 
-                ReservationModel newReservation = new ReservationModel(id, HotelAddress, checkinDate, checkoutDate );
+                ReservationModel newReservation = new ReservationModel(id, HotelId, checkinDate, checkoutDate );
                 returnList.add(newReservation);
 
             } while(cursor.moveToNext());
