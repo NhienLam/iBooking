@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.ibooking.Fragments.HomeFragment;
-
 public class Login extends AppCompatActivity {
 
     private EditText loginUsername , loginPassword;
@@ -37,9 +35,8 @@ public class Login extends AppCompatActivity {
                 boolean var = myDb.checkUser(loginUsername.getText().toString() , loginPassword.getText().toString());
                 if (var){
                     Toast.makeText(Login.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-            //        startActivity(new Intent(Login.this , MainActivity.class));
-                    startActivity(new Intent(Login.this , HomeFragment.class));
-                   // finish();
+                    Intent intent = new Intent(Login.this , HomeActivity.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(Login.this, "Login Failed !!", Toast.LENGTH_SHORT).show();
                 }

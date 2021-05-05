@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IBooking">
+        <activity android:name=".HomeActivity"></activity>
         <activity android:name=".Search" />
         <activity android:name=".Signup" />
         <activity android:name=".Login" />
