@@ -24,7 +24,7 @@ public class Search extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
         sp_city=(Spinner)findViewById(R.id.citysp);
         sp_location=(Spinner)findViewById(R.id.locationsp);
         arrayList_city = new ArrayList<>();

@@ -35,7 +35,7 @@ public class Login extends AppCompatActivity {
                 boolean var = myDb.checkUser(loginUsername.getText().toString() , loginPassword.getText().toString());
                 if (var){
                     Toast.makeText(Login.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Login.this , MainActivity.class));
+                    startActivity(new Intent(Login.this , Search.class));
                     finish();
                 }else{
                     Toast.makeText(Login.this, "Login Failed !!", Toast.LENGTH_SHORT).show();

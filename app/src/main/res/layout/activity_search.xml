@@ -48,6 +48,5 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:layout_gravity="center"
-        app:backgroundTintMode="src_over" />
+        android:layout_gravity="center" />
 </LinearLayout>
