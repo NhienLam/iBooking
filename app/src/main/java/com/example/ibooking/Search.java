@@ -2,10 +2,13 @@ package com.example.ibooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
@@ -18,9 +21,9 @@ public class Search extends AppCompatActivity {
     ArrayList<String> arrayList_sj;
     ArrayList<String> arrayList_ny;
     ArrayList<String> arrayList_la;
-
+    Button select;
     ArrayAdapter<String> arrayAdapter_location;
-
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,14 @@ public class Search extends AppCompatActivity {
         arrayList_la.add("813 Flower St, Los Angeles, CA 90017 ");
         arrayList_la.add("5400 W Century Blvd, Los Angeles, CA 90045");
         arrayList_la.add("416 W 8th St, Los Angeles, CA 90014 ");
+        select = findViewById(R.id.button10);
+
+       select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Search.this , Detail.class));
+            }
+        });
 
 
         sp_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
