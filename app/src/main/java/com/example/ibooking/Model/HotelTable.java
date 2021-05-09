@@ -6,15 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
 public class HotelTable extends  SQLiteOpenHelper{
     public static final String HOTEL_TABLE = "HOTEL_TABLE";
     public static final String COLUMN_HOTEL_ID = "HOTEL_ID";
     public static final String COLUMN_ADDRESS = "ADDRESS";
-    public static final String COLUMN_ZIP = "ZIP";
+    public static final String COLUMN_CITY = "CITY";
     public static final String COLUMN_RATING = "RATING";
 
 
@@ -24,14 +22,13 @@ public class HotelTable extends  SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + HOTEL_TABLE + " ("
-                +COLUMN_HOTEL_ID + "INT PRIMARY KEY AUTOINCREMENT, "
+        String createTableStatement = "CREATE TABLE IF NOT EXISTS " + HOTEL_TABLE + " ("
+                + COLUMN_HOTEL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_ADDRESS + " TEXT, "
-                + COLUMN_ZIP + " INT, "
+                + COLUMN_CITY + " INT, "
                 + COLUMN_RATING + " DOUBLE)";
 
         db.execSQL(createTableStatement);
-
     }
 
     @Override
@@ -46,7 +43,7 @@ public class HotelTable extends  SQLiteOpenHelper{
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_ADDRESS, hotelModel.getAddress());
-        cv.put(COLUMN_ZIP, hotelModel.getZip());
+        cv.put(COLUMN_CITY, hotelModel.getCity());
         cv.put(COLUMN_RATING, hotelModel.getRating());
 
 
@@ -58,7 +55,6 @@ public class HotelTable extends  SQLiteOpenHelper{
             return true;
         }
     }
-
 
     public boolean deleteHotel(HotelModel hotelModel){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -76,6 +72,7 @@ public class HotelTable extends  SQLiteOpenHelper{
         }
 
     }
+
     public ArrayList<HotelModel> getAllHotel(){
         ArrayList<HotelModel> hotelList = new ArrayList<>();
 
@@ -85,13 +82,10 @@ public class HotelTable extends  SQLiteOpenHelper{
         return hotelList;
     }
 
-    public ArrayList<HotelModel> getHotelByZip(int zip){
+    public ArrayList<HotelModel> getHotelByCity(int city){
         ArrayList<HotelModel> hotelList = new ArrayList<>();
         // do something here
         return hotelList;
     }
 
-    public void updateZip(HotelModel hotel){
-        //do something here
-    }
 }
