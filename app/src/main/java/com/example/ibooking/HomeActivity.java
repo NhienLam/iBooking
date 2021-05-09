@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.ibooking.Common.Common;
+
 //import com.example.ibooking.Common.Common;
 
 public class HomeActivity extends AppCompatActivity {
@@ -37,12 +39,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this , Search.class));
             }
         });
-//        setUserInformation();
+        setUserInformation();
     }
 
-//    private void setUserInformation()
-//    {
-//        userName.setText(Common.currentUser.getUserName());
-//    }
+    private void setUserInformation()
+    {
+        userName.setText(Common.currentUser.getUserName());
+    }
 
 }
