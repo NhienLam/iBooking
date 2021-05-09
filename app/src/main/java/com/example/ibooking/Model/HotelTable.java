@@ -22,8 +22,8 @@ public class HotelTable extends  SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + HOTEL_TABLE + " ("
-                +COLUMN_HOTEL_ID + "INT PRIMARY KEY AUTOINCREMENT, "
+        String createTableStatement = "CREATE TABLE IF NOT EXISTS " + HOTEL_TABLE + " ("
+                + COLUMN_HOTEL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_ADDRESS + " TEXT, "
                 + COLUMN_CITY + " INT, "
                 + COLUMN_RATING + " DOUBLE)";
