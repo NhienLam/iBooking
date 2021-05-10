@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.ibooking.Common.Common;
+import com.example.ibooking.Model.RoomModel;
+import com.example.ibooking.Model.UserModel;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "USER_RECORD";
+    private static final String DATABASE_NAME = "USER_RECORD.db";
     private static final String TABLE_NAME = "USER_DATA";
     private static final String COL_1 = "ID";
     private static final String COL_2 = "USERNAME";
@@ -62,5 +66,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else
             return false;
 
+    }
+
+    public UserModel getUserByUsername(String username){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE USERNAME='" + username + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        UserModel aUser;
+        if(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String uname = cursor.getString(1);
+            String email = cursor.getString(2);
+            String password = cursor.getString(3);
+            aUser = new UserModel(id, uname, email, password, "15416431354");
+        }
+        else
+        {
+            aUser = new UserModel(-1, "error", "error", "error", "error");
+        }
+
+        return aUser;
     }
 }
