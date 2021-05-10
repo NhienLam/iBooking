@@ -1,10 +1,9 @@
 package com.example.ibooking.Model;
 
 public interface RoomInterface {
-    int getId();
+    int getRoomId();
     int getHotelId();
     String getRoomType();
-    int getRoomNumber();
     int getCapacity();
     double getPrice();
     boolean isAvailable();
