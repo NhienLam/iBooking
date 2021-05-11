@@ -43,6 +43,7 @@ public class RoomExtraService implements RoomInterface
     {
         return room.getRoomType() + " + " + service;
     }
+
     @Override
     public boolean isAvailable() {
         return room.isAvailable();

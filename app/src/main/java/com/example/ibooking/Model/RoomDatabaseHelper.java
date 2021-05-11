@@ -197,6 +197,40 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
     }
 
     /**
+     * Gets a room that has target  hotel id, room type, availability
+     * @param hotelid hotel id
+     * @param type room type
+     * @param available availability
+     * @return a room that has target  hotelid, room type, availability
+     */
+    public RoomInterface getRoomByHotelId_Type_IsAvailabble(int hotelid, String type, boolean available){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + "='" + hotelid + "' AND "
+                + COLUMN_ROOM_TYPE + "='" + type + "' AND "
+                + COLUMN_AVAILABLE_ROOM + "='" + available + "'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        RoomInterface aRoom;
+        if(cursor.moveToNext()){
+            int roomID = cursor.getInt(0);
+            int hotelID = cursor.getInt(1);
+            String roomtype =  cursor.getString(2);
+            int capacity = cursor.getInt(3);
+            double price = cursor.getDouble(4);
+            boolean isAvailable = cursor.getInt(5) == 1 ? true:false;
+
+            aRoom = new RoomModel(roomID, hotelID, roomtype, capacity, price, isAvailable);
+        }
+        else
+        {
+            aRoom = new RoomModel(-1, -1, "error", -1, -1, false);
+        }
+        return aRoom;
+    }
+
+    /**
      * Update roomModel isAvailable
      * @param roomModel roomModel to update
      * @param newIsAvailable new availability status
