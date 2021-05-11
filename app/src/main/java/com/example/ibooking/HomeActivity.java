@@ -11,8 +11,6 @@ import androidx.cardview.widget.CardView;
 
 import com.example.ibooking.Common.Common;
 
-//import com.example.ibooking.Common.Common;
-
 public class HomeActivity extends AppCompatActivity {
 
     private TextView userName;

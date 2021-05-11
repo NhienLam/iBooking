@@ -44,14 +44,14 @@ public class Search extends AppCompatActivity {
         arrayList_sj.add("656 America Center Ct, San Jose, CA 95002");
 
         arrayList_ny = new ArrayList<>();
-        arrayList_ny.add("44 W 29th St, New York, NY 10001 ");
-        arrayList_ny.add("137 W 111th St, New York, NY 10026  ");
-        arrayList_ny.add("870 7th Ave, New York, NY 10019  ");
+        arrayList_ny.add("44 W 29th St, New York, NY 10001");
+        arrayList_ny.add("137 W 111th St, New York, NY 10026");
+        arrayList_ny.add("870 7th Ave, New York, NY 10019");
 
         arrayList_la = new ArrayList<>();
-        arrayList_la.add("813 Flower St, Los Angeles, CA 90017 ");
+        arrayList_la.add("813 Flower St, Los Angeles, CA 90017");
         arrayList_la.add("5400 W Century Blvd, Los Angeles, CA 90045");
-        arrayList_la.add("416 W 8th St, Los Angeles, CA 90014 ");
+        arrayList_la.add("416 W 8th St, Los Angeles, CA 90014");
         select = findViewById(R.id.button10);
 
        select.setOnClickListener(new View.OnClickListener() {

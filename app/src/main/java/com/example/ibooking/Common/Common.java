@@ -8,8 +8,8 @@ import java.util.Date;
 
 public class Common {
     public static UserModel currentUser;
-    public static HotelModel currentHotel;
-    public static Date currentCheckin;
-    public static Date currentCheckout;
+    public static HotelModel currentHotel = new HotelModel(1, "2050 Gateway Pl, San Jose, CA 95110", "San Jose", 4);
+    public static String currentCheckin;
+    public static String currentCheckout;
     public static RoomInterface currentRoom;
 }

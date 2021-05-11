@@ -15,7 +15,6 @@ public class HotelTable extends  SQLiteOpenHelper{
     public static final String COLUMN_CITY = "CITY";
     public static final String COLUMN_RATING = "RATING";
 
-
     public HotelTable( Context context) {
         super(context, "hotel.db",null , 1);
     }
@@ -73,19 +72,42 @@ public class HotelTable extends  SQLiteOpenHelper{
 
     }
 
-    public ArrayList<HotelModel> getAllHotel(){
-        ArrayList<HotelModel> hotelList = new ArrayList<>();
+    public HotelModel getHotelByAddress(String address){
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + HOTEL_TABLE, null);
-        //do something here
-        return hotelList;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + HOTEL_TABLE + " WHERE " + COLUMN_ADDRESS + "='" + address + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        HotelModel aHotel;
+        if(cursor.moveToNext()){
+            int hotelid = cursor.getInt(0);
+            String hAddress = cursor.getString(1);
+            String city = cursor.getString(2);
+            Double rating = cursor.getDouble(3);
+            aHotel = new HotelModel(hotelid, hAddress, city, rating);
+        }
+        else
+        {
+            aHotel = new HotelModel(-1, "error", "error", -1);
+        }
+
+        return aHotel;
     }
 
-    public ArrayList<HotelModel> getHotelByCity(int city){
-        ArrayList<HotelModel> hotelList = new ArrayList<>();
-        // do something here
-        return hotelList;
-    }
+//    public ArrayList<HotelModel> getAllHotel(){
+//        ArrayList<HotelModel> hotelList = new ArrayList<>();
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + HOTEL_TABLE, null);
+//        //do something here
+//        return hotelList;
+//    }
+
+//    public ArrayList<HotelModel> getHotelByCity(int city){
+//        ArrayList<HotelModel> hotelList = new ArrayList<>();
+//        // do something here
+//        return hotelList;
+//    }
 
 }
