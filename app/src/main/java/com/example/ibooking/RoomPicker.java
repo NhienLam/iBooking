@@ -14,12 +14,17 @@ import android.widget.Toast;
 
 import com.example.ibooking.Common.Common;
 import com.example.ibooking.Model.RoomDatabaseHelper;
+import com.example.ibooking.Model.RoomInterface;
+import com.example.ibooking.Model.RoomModel;
+
+import java.util.ArrayList;
 
 public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    CheckBox cb1,cb2,cb3,cb4;
+    private CheckBox cb1,cb2,cb3,cb4;
     private Button confirmButton;
     private RoomDatabaseHelper myDb;
+    private ArrayList<String> service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
 
         confirmButton = findViewById(R.id.button4);
         myDb = new RoomDatabaseHelper(this);
+        cb1 = findViewById(R.id.checkBox);
+        cb2 = findViewById(R.id.checkBox2);
+        cb3 = findViewById(R.id.checkBox3);
+        cb4 = findViewById(R.id.checkBox4);
+        service = new ArrayList<>();
 
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.room_picker_type, android.R.layout.simple_spinner_item);
@@ -35,9 +45,25 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+//        createRoomsDB();
+
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(cb1.isChecked()) {
+                    service.add(cb1.getText().toString());
+                }
+                if(cb2.isChecked()) {
+                    service.add(cb2.getText().toString());
+                }
+                if(cb3.isChecked()) {
+                    service.add(cb3.getText().toString());
+                }
+                if(cb4.isChecked()) {
+                    service.add(cb4.getText().toString());
+                }
+                Toast.makeText(RoomPicker.this,service.toString(), Toast.LENGTH_SHORT).show();
+
                 startActivity(new Intent(RoomPicker.this , DatePickerActivity.class));
             }
         });
@@ -48,8 +74,40 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(),text, Toast.LENGTH_SHORT).show();
         //** Comment out if cannot **
-//        Common.currentRoom = myDb.getRoomByHotelId_Type_IsAvailabble(Common.currentHotel.getHotelID(), text, true);
+        Common.currentRoom = myDb.getRoomByHotelId_Type_IsAvailabble(Common.currentHotel.getHotelID(), text, true);
     }
+
+//    public void createRoomsDB()
+//    {
+//        //     public RoomModel(int roomId, int hotelId, String roomType, int capacity, double price, boolean isAvailable) {
+//        ArrayList<RoomInterface> rooms = new ArrayList<>();
+//        RoomInterface r;
+//        try{
+//            for(int i = 0; i < 5; i++)
+//            {
+//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "SINGLE", 1, 100, true);
+//                rooms.add(r);
+//            }
+//            for(int i = 0; i < 5; i++)
+//            {
+//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "DOUBLE", 2, 120, true);
+//                rooms.add(r);
+//            }
+//            for(int i = 0; i < 5; i++)
+//            {
+//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "TRIPLE", 3, 150, true);
+//                rooms.add(r);
+//            }
+//        }
+//        catch (Exception e){
+//            r = new RoomModel(-1, -1, "error", -1, -1, false);
+//            rooms.add(r);
+//        }
+//        for(RoomInterface ri : rooms)
+//        {
+//            myDb.insertRoom(ri);
+//        }
+//    }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
