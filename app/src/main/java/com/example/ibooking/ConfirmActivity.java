@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ibooking.Common.Common;
+import com.example.ibooking.Model.ReservationModel;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class ConfirmActivity extends AppCompatActivity {
 
@@ -31,6 +36,8 @@ public class ConfirmActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Unable to convert String mmmm-d-yyyy to localdate
+                // Common.currentReservation = new ReservationModel( -1, Common.currentHotel.getHotelID(), Common.currentCheckin, Common.currentCheckout)
                 startActivity(new Intent(ConfirmActivity.this , HomeActivity.class));
             }
         });
@@ -43,6 +50,6 @@ public class ConfirmActivity extends AppCompatActivity {
         txt_booking_checkin_date_text.setText(Common.currentCheckin);
         txt_booking_checkout_date_text.setText(Common.currentCheckout);
         txt_room_type_text.setText("Room: " + Common.currentRoom.getRoomType());
-        txt_price_text.setText(String.valueOf(Common.currentRoom.getPrice()));
+        txt_price_text.setText(String.valueOf(Common.currentRoom.getPrice()) + "/day");
     }
 }

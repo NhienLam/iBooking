@@ -101,7 +101,7 @@
                     android:layout_height="50dp"/>
 
                 <TextView
-                    android:text="Cart"
+                    android:text="Reservations"
                     android:layout_gravity="center_horizontal"
                     android:textSize="22sp"
                     android:layout_width="wrap_content"
@@ -118,6 +118,109 @@
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_booking_info"
+            android:visibility="gone"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_event_note_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </ImageView>
+
+                <TextView
+                    android:text="Your Booking Information"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                
+                <TextView
+                    android:text="Address: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/txt_reservation_address"
+                    android:text="Address Hotel "
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Check In Date: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/txt_reservation_checkin"
+                    android:text="Checkin Date"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Check Out Date: "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/txt_reservation_checkout"
+                    android:text="Checkout Date"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

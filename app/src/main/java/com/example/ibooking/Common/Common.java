@@ -1,6 +1,7 @@
 package com.example.ibooking.Common;
 
 import com.example.ibooking.Model.HotelModel;
+import com.example.ibooking.Model.ReservationModel;
 import com.example.ibooking.Model.RoomInterface;
 import com.example.ibooking.Model.RoomModel;
 import com.example.ibooking.Model.UserModel;
@@ -12,4 +13,5 @@ public class Common {
     public static String currentCheckin;
     public static String currentCheckout;
     public static RoomInterface currentRoom;
+    public static ReservationModel currentReservation;
 }
