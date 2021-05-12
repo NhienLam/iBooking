@@ -2,6 +2,7 @@ package com.example.ibooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class Signup extends AppCompatActivity {
                 boolean var = myDB.registerUser(usernameSignUp.getText().toString() , emailSignUp.getText().toString() , passwordSignUp.getText().toString());
                 if(var){
                     Toast.makeText(Signup.this, "User Registered Successfully !!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Signup.this , Login.class));
                 }
                 else
                     Toast.makeText(Signup.this, "Registration Error !!", Toast.LENGTH_SHORT).show();
