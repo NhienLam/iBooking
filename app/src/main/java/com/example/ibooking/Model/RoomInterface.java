@@ -7,5 +7,5 @@ public interface RoomInterface {
     int getCapacity();
     double getPrice();
     boolean isAvailable();
-    RoomInterface addService(RoomInterface room, Service newService);
+    RoomInterface addService(RoomInterface room, String newService);
 }

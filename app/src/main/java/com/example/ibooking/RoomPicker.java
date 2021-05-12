@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.example.ibooking.Common.Common;
 import com.example.ibooking.Model.RoomDatabaseHelper;
+import com.example.ibooking.Model.RoomExtraService;
 import com.example.ibooking.Model.RoomInterface;
 import com.example.ibooking.Model.RoomModel;
+import com.example.ibooking.Model.Service;
 
 import java.util.ArrayList;
 
@@ -45,7 +47,7 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-//        createRoomsDB();
+        createRoomsDB();
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +64,15 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
                 if(cb4.isChecked()) {
                     service.add(cb4.getText().toString());
                 }
-                Toast.makeText(RoomPicker.this,service.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomPicker.this, service.toString(), Toast.LENGTH_SHORT).show();
+
+                /**
+                 * DECORATOR DESIGN PATTERN
+                 */
+                for(String s : service)
+                {
+                    Common.currentRoom  = new RoomExtraService( Common.currentRoom , s);
+                }
 
                 startActivity(new Intent(RoomPicker.this , DatePickerActivity.class));
             }
@@ -73,41 +83,40 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(),text, Toast.LENGTH_SHORT).show();
-        //** Comment out if cannot **
-        Common.currentRoom = myDb.getRoomByHotelId_Type_IsAvailabble(Common.currentHotel.getHotelID(), text, true);
+
+        Common.currentRoom  = myDb.getRoomByHotelId_Type_IsAvailable(Common.currentHotel.getHotelID(), text, true);
     }
 
-//    public void createRoomsDB()
-//    {
-//        //     public RoomModel(int roomId, int hotelId, String roomType, int capacity, double price, boolean isAvailable) {
-//        ArrayList<RoomInterface> rooms = new ArrayList<>();
-//        RoomInterface r;
-//        try{
-//            for(int i = 0; i < 5; i++)
-//            {
-//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "SINGLE", 1, 100, true);
-//                rooms.add(r);
-//            }
-//            for(int i = 0; i < 5; i++)
-//            {
-//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "DOUBLE", 2, 120, true);
-//                rooms.add(r);
-//            }
-//            for(int i = 0; i < 5; i++)
-//            {
-//                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "TRIPLE", 3, 150, true);
-//                rooms.add(r);
-//            }
-//        }
-//        catch (Exception e){
-//            r = new RoomModel(-1, -1, "error", -1, -1, false);
-//            rooms.add(r);
-//        }
-//        for(RoomInterface ri : rooms)
-//        {
-//            myDb.insertRoom(ri);
-//        }
-//    }
+    public void createRoomsDB()
+    {
+        ArrayList<RoomInterface> rooms = new ArrayList<>();
+        RoomInterface r;
+        try{
+            for(int i = 0; i < 5; i++)
+            {
+                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "SINGLE", 1, 100, true);
+                rooms.add(r);
+            }
+            for(int i = 0; i < 5; i++)
+            {
+                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "DOUBLE", 2, 120, true);
+                rooms.add(r);
+            }
+            for(int i = 0; i < 5; i++)
+            {
+                r = new RoomModel(-1, Common.currentHotel.getHotelID(), "TRIPLE", 3, 150, true);
+                rooms.add(r);
+            }
+        }
+        catch (Exception e){
+            r = new RoomModel(-1, -1, "error", -1, -1, false);
+            rooms.add(r);
+        }
+        for(RoomInterface ri : rooms)
+        {
+            myDb.insertRoom(ri);
+        }
+    }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

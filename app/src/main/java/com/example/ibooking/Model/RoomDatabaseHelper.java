@@ -203,13 +203,19 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
      * @param available availability
      * @return a room that has target  hotelid, room type, availability
      */
-    public RoomInterface getRoomByHotelId_Type_IsAvailabble(int hotelid, String type, boolean available){
+    public RoomInterface getRoomByHotelId_Type_IsAvailable(int hotelid, String type, boolean available){
 
         SQLiteDatabase db = this.getWritableDatabase();
+//        String query = "SELECT * FROM " + ROOM_TABLE + " WHERE HOTEL_ID='" + hotelid + "' AND ROOM_TYPE='" + type + "'";
+
+//        String query = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + "='" + hotelid + "' AND "
+//                + COLUMN_ROOM_TYPE + "='" + type + "' AND "
+//                + COLUMN_AVAILABLE_ROOM + "='" + available + "'";
 
         String query = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + "='" + hotelid + "' AND "
-                + COLUMN_ROOM_TYPE + "='" + type + "' AND "
-                + COLUMN_AVAILABLE_ROOM + "='" + available + "'";
+                + COLUMN_ROOM_TYPE + "='" + type + "'";
+
+
         Cursor cursor = db.rawQuery(query, null);
 
         RoomInterface aRoom;

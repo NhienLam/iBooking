@@ -41,7 +41,7 @@ public class RoomModel implements RoomInterface
      * @param room the target room
      * @param newService the extra service to add
      */
-    public RoomInterface addService(RoomInterface room, Service newService)
+    public RoomInterface addService(RoomInterface room, String newService)
     {
         return room = new RoomExtraService(room, newService);
     }

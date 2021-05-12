@@ -13,7 +13,7 @@ import com.example.ibooking.Common.Common;
 public class ConfirmActivity extends AppCompatActivity {
 
     private Button confirmButton;
-    private TextView txt_hotel_address, txt_booking_checkin_date_text, txt_booking_checkout_date_text, txt_room_type_text;
+    private TextView txt_hotel_address, txt_booking_checkin_date_text, txt_booking_checkout_date_text, txt_room_type_text, txt_price_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class ConfirmActivity extends AppCompatActivity {
         txt_booking_checkin_date_text = findViewById(R.id.txt_booking_checkin_date_text);
         txt_booking_checkout_date_text = findViewById(R.id.txt_booking_checkout_date_text);
         txt_room_type_text = findViewById(R.id.txt_room_type_text);
+        txt_price_text = findViewById(R.id.txt_price_text);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,7 @@ public class ConfirmActivity extends AppCompatActivity {
         txt_hotel_address.setText(Common.currentHotel.getAddress());
         txt_booking_checkin_date_text.setText(Common.currentCheckin);
         txt_booking_checkout_date_text.setText(Common.currentCheckout);
-        txt_room_type_text.setText(Common.currentRoom.getRoomType());
+        txt_room_type_text.setText("Room: " + Common.currentRoom.getRoomType());
+        txt_price_text.setText(String.valueOf(Common.currentRoom.getPrice()));
     }
 }

@@ -3,10 +3,10 @@ package com.example.ibooking.Model;
 public class RoomExtraService implements RoomInterface
 {
     private RoomInterface room;
-    private Service service;
+    private String service;
     private static final double PRICE = 10.00;
 
-    public RoomExtraService(RoomInterface room, Service service)
+    public RoomExtraService(RoomInterface room, String service)
     {
         this.room = room;
         this.service = service;
@@ -19,7 +19,7 @@ public class RoomExtraService implements RoomInterface
      * @param newService the new service to add
      * @return new RoomExtraService
      */
-    public RoomInterface addService(RoomInterface room, Service newService)
+    public RoomInterface addService(RoomInterface room, String newService)
     {
         return room = new RoomExtraService(room, newService);
     }
