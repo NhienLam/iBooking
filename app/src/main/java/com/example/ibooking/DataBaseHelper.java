@@ -68,6 +68,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Searches and gets a user with the target username in the table
+     * @param username target username
+     * @return a user with the target username
+     */
     public UserModel getUserByUsername(String username){
 
         SQLiteDatabase db = this.getWritableDatabase();

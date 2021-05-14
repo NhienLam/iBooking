@@ -11,8 +11,9 @@ import androidx.cardview.widget.CardView;
 
 import com.example.ibooking.Common.Common;
 
-//import com.example.ibooking.Common.Common;
-
+/**
+ * User Homepage where user can start booking and view reservations
+ */
 public class HomeActivity extends AppCompatActivity {
 
     private TextView userName, txt_reservation_address, txt_reservation_checkin, txt_reservation_checkout;
@@ -21,6 +22,10 @@ public class HomeActivity extends AppCompatActivity {
     private DataBaseHelper myDb;
 
     @Override
+    /**
+     * Is called when HomeActivity begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -36,6 +41,9 @@ public class HomeActivity extends AppCompatActivity {
 
         myDb = new DataBaseHelper(this);
 
+        /**
+         * When a Booking Button is clicked, goes to Search activity
+         */
         cardViewBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +52,9 @@ public class HomeActivity extends AppCompatActivity {
         });
         setUserInformation();
 
+        /**
+         * When a Reservations Button is clicked, displays/hides reservations that user made
+         */
         cardViewCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,11 +63,19 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets username of the current user
+     */
     private void setUserInformation()
     {
         userName.setText(Common.currentUser.getUserName());
     }
 
+    /**
+     * Loads new booking information to the homepage including:
+     * Hotel address
+     * Check in and check out date
+     */
     private void loadBookingInfo()
     {
         txt_reservation_address.setText(Common.currentHotel.getAddress());

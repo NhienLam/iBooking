@@ -17,7 +17,6 @@ import com.example.ibooking.Model.RoomDatabaseHelper;
 import com.example.ibooking.Model.RoomExtraService;
 import com.example.ibooking.Model.RoomInterface;
 import com.example.ibooking.Model.RoomModel;
-import com.example.ibooking.Model.Service;
 
 import java.util.ArrayList;
 
@@ -49,6 +48,10 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
 
         createRoomsDB();
 
+        /**
+         * When Confirm Button is clicked, adds additional services that user chose to the room
+         * Goes to DatePickerActivity
+         */
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +90,12 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         Common.currentRoom  = myDb.getRoomByHotelId_Type_IsAvailable(Common.currentHotel.getHotelID(), text, true);
     }
 
+    /**
+     * Create rooms for this hotel in database
+     * 5 SINGLE rooms
+     * 5 DOUBLE rooms
+     * 5 TRIPLE rooms
+     */
     public void createRoomsDB()
     {
         ArrayList<RoomInterface> rooms = new ArrayList<>();

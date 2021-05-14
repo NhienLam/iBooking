@@ -10,6 +10,10 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Database helper of RoomInterface
+ * Handles all the operations related to Room database
+ */
 public class RoomDatabaseHelper extends SQLiteOpenHelper
 {
     public static final String ROOM_TABLE = "ROOM_TABLE";
@@ -29,11 +33,11 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         super(context, "room.db", null, 1);
     }
 
-    @Override
     /**
      * Called the first time a database is accessed
      * Creates a new database
      */
+    @Override
     public void onCreate(SQLiteDatabase db)
     {
         String createTableStatement = "CREATE TABLE " + ROOM_TABLE + " ("
@@ -47,11 +51,12 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         db.execSQL(createTableStatement);
     }
 
-    @Override
+
     /**
      * Called if the database version number changes
      * Prevents previous users apps from breaking when change database design
      */
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ ROOM_TABLE);
         onCreate(db);
@@ -145,7 +150,6 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
         return returnList;
     }
 
-    // NEED TO DOUBLECHECK BACK IF IT WORKS PROPERLY
     /**
      * Gets all the rooms of a specific hotel
      * aka gets all the rooms that have the same hotel id as the target hotelId
@@ -206,11 +210,6 @@ public class RoomDatabaseHelper extends SQLiteOpenHelper
     public RoomInterface getRoomByHotelId_Type_IsAvailable(int hotelid, String type, boolean available){
 
         SQLiteDatabase db = this.getWritableDatabase();
-//        String query = "SELECT * FROM " + ROOM_TABLE + " WHERE HOTEL_ID='" + hotelid + "' AND ROOM_TYPE='" + type + "'";
-
-//        String query = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + "='" + hotelid + "' AND "
-//                + COLUMN_ROOM_TYPE + "='" + type + "' AND "
-//                + COLUMN_AVAILABLE_ROOM + "='" + available + "'";
 
         String query = "SELECT * FROM " + ROOM_TABLE + " WHERE " + COLUMN_HOTEL_ID + "='" + hotelid + "' AND "
                 + COLUMN_ROOM_TYPE + "='" + type + "'";

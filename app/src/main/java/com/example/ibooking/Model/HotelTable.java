@@ -72,6 +72,11 @@ public class HotelTable extends  SQLiteOpenHelper{
 
     }
 
+    /**
+     * Searches and gets a hotel with the target address in the table
+     * @param address target address
+     * @return a hotel with the target address
+     */
     public HotelModel getHotelByAddress(String address){
 
         SQLiteDatabase db = this.getWritableDatabase();

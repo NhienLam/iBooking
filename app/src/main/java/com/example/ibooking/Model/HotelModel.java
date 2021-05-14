@@ -22,42 +22,6 @@ public class HotelModel {
         this.roomList = new ArrayList<RoomInterface>();
     }
 
-    /**
-     * Create rooms for this hotel with the hotelId
-     * 5 SINGLE rooms
-     * 5 DOUBLE rooms
-     * 5 TRIPLE rooms
-     */
-    public void createHotelRooms()
-    {
-        RoomInterface room;
-
-        // RoomModel(int roomId, int hotelId, String roomType, int capacity, double price, boolean isAvailable)
-        // create 5 SINGLE rooms
-        for(int i = 0; i < NUMBER_SINGLE_ROOM; i++)
-        {
-            room = new RoomModel(-1, this.hotelID, "SINGLE", 1, 100, true);
-            roomList.add(room);
-        }
-        // create 5 DOUBLE rooms
-        for(int i = 0; i < NUMBER_DOUBLE_ROOM; i++)
-        {
-            room = new RoomModel(-1, this.hotelID, "DOUBLE", 2, 120, true);
-            roomList.add(room);
-        }
-        // create 5 TRIPLE rooms
-        for(int i = 0; i < NUMBER_TRIPLE_ROOM; i++)
-        {
-            room = new RoomModel(-1, this.hotelID, "TRIPLE", 3, 150, true);
-            roomList.add(room);
-        }
-//        for(int i = 0 ; i<roomList.size();i++)
-//        {
-//            System.out.println(roomList.get(i).toString());
-//        }
-    }
-
-
     public List<RoomInterface> getRoomList() {
         return roomList;
     }

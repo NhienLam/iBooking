@@ -16,12 +16,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Confirmation page that is the last step of booking
+ * which display booking information that user makes to let user confirm
+ * before making a reservation
+ */
 public class ConfirmActivity extends AppCompatActivity {
 
     private Button confirmButton;
     private TextView txt_hotel_address, txt_booking_checkin_date_text, txt_booking_checkout_date_text, txt_room_type_text, txt_price_text;
 
     @Override
+    /**
+     * Is called when ConfirmActivity begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
@@ -34,6 +43,9 @@ public class ConfirmActivity extends AppCompatActivity {
         txt_room_type_text = findViewById(R.id.txt_room_type_text);
         txt_price_text = findViewById(R.id.txt_price_text);
 
+        /**
+         * When a Confirm Button is clicked, displays a message and goes to HomeActivity
+         */
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +58,13 @@ public class ConfirmActivity extends AppCompatActivity {
         setReservationInfo();
     }
 
+    /**
+     * Sets the booking information that use made in the booking process including:
+     * Hotel address
+     * Check in and check out date
+     * Room type and extra services
+     * Price per day
+     */
     private void setReservationInfo()
     {
         txt_hotel_address.setText(Common.currentHotel.getAddress());

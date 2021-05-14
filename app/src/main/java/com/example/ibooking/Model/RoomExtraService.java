@@ -1,11 +1,20 @@
 package com.example.ibooking.Model;
 
+/**
+ * Decorator Design Pattern
+ * Represents a Room with additional requested services
+ */
 public class RoomExtraService implements RoomInterface
 {
     private RoomInterface room;
     private String service;
     private static final double PRICE = 10.00;
 
+    /**
+     * Constructs a room with a new service
+     * @param room room to add service to
+     * @param service new service
+     */
     public RoomExtraService(RoomInterface room, String service)
     {
         this.room = room;
@@ -44,21 +53,38 @@ public class RoomExtraService implements RoomInterface
         return room.getRoomType() + " + " + service;
     }
 
+
+    /**
+     * Gets availability status of the room
+     * @return availability status of the room
+     */
     @Override
     public boolean isAvailable() {
         return room.isAvailable();
     }
 
+    /**
+     * Gets id of room
+     * @return id of room
+     */
     @Override
     public int getRoomId() {
         return room.getRoomId();
     }
 
+    /**
+     * Gets hotel id
+     * @return hotel id
+     */
     @Override
     public int getHotelId() {
         return room.getHotelId();
     }
 
+    /**
+     * Gets capacity of room
+     * @return capacity of room
+     */
     @Override
     public int getCapacity() {
         return room.getCapacity();
