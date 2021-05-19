@@ -6,6 +6,10 @@ import androidx.annotation.RequiresApi;
 
 import java.time.LocalDate;
 
+/**
+ * Hotel Room that stores id, HotelAddress, checkInDate, checkOutDate
+ */
+ */
 public class ReservationModel {
     private int HotelId;
     private int id;
@@ -23,34 +27,64 @@ public class ReservationModel {
     }
     //RESERVATION_TABLE [HotelId, id, CheckinDate, CheckoutDate]
 
+     /**
+     * Gets id of User
+     * @return id of user
+     */
     public int getId() {
         return id;
     }
 
+     /**
+     * Sets user id
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    /**
+     * Gets hotel id
+     * @return hotel id
+     */
     public int getHotelId() {
         return HotelId;
     }
 
+     /**
+     * Sets hotel id
+     * @param hotelId
+     */
     public void setHotelAddress(int HotelId) {
         this.HotelId = HotelId;
     }
-
+    
+    /**
+     * Gets checkin date
+     * @return checkInDate
+     */
     public LocalDate getcheckInDate() {
         return checkInDate;
     }
-
+     /**
+     * Sets checkInDate
+     * @param checkInDate
+     */
     public void setcheckInDate (LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
-
+    /**
+     * Gets checkout date
+     * @return checkOutDate
+     */
     public LocalDate getcheckOutDate() {
         return checkInDate;
     }
-
+    
+     /**
+     * Sets checkout date
+     * @param checkOutDate
+     */
     public void setcheckOutDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
