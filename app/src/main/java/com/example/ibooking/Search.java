@@ -13,7 +13,9 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import java.util.ArrayList;
-
+/**
+ * Search  where user can select city and location
+ */
 public class Search extends AppCompatActivity {
     Spinner sp_city,sp_location;
     ArrayList<String> arrayList_city;
@@ -25,6 +27,10 @@ public class Search extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter_location;
     @SuppressLint("WrongViewCast")
     @Override
+    /**
+     * Is called when Search begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
@@ -56,6 +62,9 @@ public class Search extends AppCompatActivity {
 
        select.setOnClickListener(new View.OnClickListener() {
             @Override
+            /**
+             * Redirect users from search page to detail page
+             */
             public void onClick(View v) {
                 startActivity(new Intent(Search.this , Detail.class));
             }
@@ -64,6 +73,10 @@ public class Search extends AppCompatActivity {
 
         sp_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
+            /**
+             * Users select a city
+             * Return an array of location based on the city
+             */
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position==0)
                 {

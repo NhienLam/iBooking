@@ -83,7 +83,7 @@ public class ReservationModel {
     
      /**
      * Sets checkout date
-     * @param checkOutDate
+     * @param checkInDate
      */
     public void setcheckOutDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;

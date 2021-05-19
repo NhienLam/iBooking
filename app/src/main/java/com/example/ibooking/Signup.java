@@ -8,13 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+/**
+ * Signup  where user sign up for an account
+ * username and password are saved in database
+ */
 public class Signup extends AppCompatActivity {
 
     private EditText emailSignUp , usernameSignUp , passwordSignUp;
     private Button signUpButton;
     private DataBaseHelper myDB;
     @Override
+    /**
+     * Is called when Signup begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
@@ -28,7 +35,11 @@ public class Signup extends AppCompatActivity {
         myDB = new DataBaseHelper(this);
         insertUser();
     }
-
+    /**
+     * Collecting user's input for user name and password
+     * Insert them into data base
+     * Indicating if users register successfully
+     */
     private void insertUser(){
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

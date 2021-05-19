@@ -6,10 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+/**
+ * Connecting with Detail Activity
+ * Direct users from Detail[age to Room[icker page  when user press a button.
+ */
 public class Detail extends AppCompatActivity {
 
     private Button BookingButton ;
+    /**
+     * Is called when DetailActivity begins
+     * Initializes instance variables and set onclick function for buttons
+     * Direct users to a new page when users press a button
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

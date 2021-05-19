@@ -13,13 +13,19 @@ import android.widget.Toast;
 
 import com.example.ibooking.Common.Common;
 import com.example.ibooking.Model.UserModel;
-
+/**
+ * User Login where user can start type their username and password
+ */
 public class Login extends AppCompatActivity {
 
     private EditText loginUsername , loginPassword;
     private Button loginButton;
     private DataBaseHelper myDb;
     @Override
+    /**
+     * Is called when Login begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -33,6 +39,12 @@ public class Login extends AppCompatActivity {
         loginUser();
 
     }
+
+    /**
+     * Collecting user's input for username and password
+     * Veryfying them with data in database
+     * Indicating if users login successfully
+     */
     private void loginUser(){
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

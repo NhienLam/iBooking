@@ -11,6 +11,11 @@ import com.example.ibooking.Common.Common;
 import com.example.ibooking.Model.RoomModel;
 import com.example.ibooking.Model.UserModel;
 
+/**
+ * Create a user data base
+ * Storing user id, name , email , password
+ * Handling user's transaction regarding of users.
+ */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "USER_RECORD.db";
@@ -19,23 +24,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL_2 = "USERNAME";
     private static final String COL_3 = "EMAIL";
     private static final String COL_4 = "PASSWORD";
-
+    /**
+     * Constructs a DatabaseHelper for users
+     * @param context use for locating paths to the database
+     */
     public DataBaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME , null, 1);
     }
-
+    /**
+     * Create a user database that store name, email , and password.
+     * Assign user's id in increment order.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT , USERNAME TEXT , EMAIL TEXT , PASSWORD TEXT )");
 
     }
-
+    /**
+     * Check if the database already existed.
+     * Prevent users from creating a duplicate.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-
+    /**
+     * Create a method to collect user inputs for username,email, password.
+     * Assigning these variable into user's database.
+     * @return true or false base on whether user's input is store successfully in the database.
+     */
     public boolean registerUser(String username , String email , String password){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -50,7 +68,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else
             return true;
     }
-
+    /**
+     * Compare user's input for  username and password to the database.
+     *@return true or false based on user's input
+     */
     public boolean checkUser(String username , String password){
 
         SQLiteDatabase db = this.getWritableDatabase();
