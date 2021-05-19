@@ -20,6 +20,9 @@ import com.example.ibooking.Model.RoomModel;
 
 import java.util.ArrayList;
 
+/**
+ * Room picker page where user can start booking their rooms
+ */
 public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private CheckBox cb1,cb2,cb3,cb4;
@@ -28,6 +31,10 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
     private ArrayList<String> service;
 
     @Override
+     /**
+     * Is called when RoomPicker begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_picker);
@@ -40,6 +47,9 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         cb4 = findViewById(R.id.checkBox4);
         service = new ArrayList<>();
 
+        /**
+        * When spinner is click show all room options
+        */
         Spinner spinner = findViewById(R.id.spinner3);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.room_picker_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -82,6 +92,9 @@ public class RoomPicker extends AppCompatActivity implements AdapterView.OnItemS
         });
     }
 
+    /**
+    * Displayed popup after a room is selected
+    */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
