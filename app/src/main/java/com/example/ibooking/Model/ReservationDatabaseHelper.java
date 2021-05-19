@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.LocalDate.*;
-
+/**
+ * Database helper of Reservation
+ * Handles all the operations related to Room database
+ */
 public class ReservationDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String RESERVATION_TABLE = "RESERVATION_TABLE";
@@ -22,7 +25,10 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "COLUMN_ID";
     private static final String COLUMN_CHECKIN_DATE = "COLUMN_CHECKIN_DATE";
     private static final String COLUMN_CHECKOUT_DATE = "COLUMN_CHECKOUT_DATE";
-
+    /**
+     * Constructs a ReservationDatabaseHelper
+     * @param context use for locating paths to the database
+     */
     public ReservationDatabaseHelper(Context context) {
         super(context, "Reservation.db", null, 1);
     }
@@ -39,7 +45,10 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableStatement);
     }
 
-    //this is called if the version changed
+    /**
+     * Called if the database version number changes
+     * Prevents previous users apps from breaking when change database design
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -92,6 +101,10 @@ public class ReservationDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    /**
+     * Gets all rooms in the database
+     * @return all rooms in the database
+     */
     public List<ReservationModel> getAllReservation()
     {
         List<ReservationModel> returnList = new ArrayList<>();
