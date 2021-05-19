@@ -13,11 +13,18 @@ import androidx.fragment.app.FragmentManager;
 import com.example.ibooking.Common.Common;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+/**
+ * DatePicker View for users to select checkin and checkout date
+ */
 
 public class DatePickerActivity extends AppCompatActivity {
     private Button checkinbtn,checkoutbtn, confirmbtn;
     private TextView tvcheckin, tvcheckout;
 
+    /**
+     * Is called when DatePickerActivity begins
+     * Initializes instance variables and set onclick function for buttons
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +40,10 @@ public class DatePickerActivity extends AppCompatActivity {
         checkInBuilder.setTitleText("Check in: Select a date");
 
         MaterialDatePicker materialDatePickerIn = checkInBuilder.build();
+
+        /**
+         * When Checkin Button is clicked, the calender prompts user to select a date
+         */
         checkinbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +63,10 @@ public class DatePickerActivity extends AppCompatActivity {
         checkOutBuilder.setTitleText("Check out: Select a date");
 
         MaterialDatePicker materialDatePickerOut = checkOutBuilder.build();
+
+        /**
+         * When Checkout Button is clicked, the calender prompts user to select a date
+         */
         checkoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +82,9 @@ public class DatePickerActivity extends AppCompatActivity {
             }
         }
         );
-
+        /**
+         * When Confirm Button is clicked, move to the next activity
+         */
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

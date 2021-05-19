@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/**
+ * Database helper of HotelModel
+ * Handles all the operations related to Hotel database
+ */
 public class HotelTable extends  SQLiteOpenHelper{
     public static final String HOTEL_TABLE = "HOTEL_TABLE";
     public static final String COLUMN_HOTEL_ID = "HOTEL_ID";
@@ -15,10 +19,18 @@ public class HotelTable extends  SQLiteOpenHelper{
     public static final String COLUMN_CITY = "CITY";
     public static final String COLUMN_RATING = "RATING";
 
+    /**
+     * Constructs a Hotel database helper
+     * @param context use for locating paths to the database
+     */
     public HotelTable( Context context) {
         super(context, "hotel.db",null , 1);
     }
 
+    /**
+     * Called the first time a database is accessed
+     * Creates a new Hotel Table
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTableStatement = "CREATE TABLE IF NOT EXISTS " + HOTEL_TABLE + " ("
@@ -29,13 +41,22 @@ public class HotelTable extends  SQLiteOpenHelper{
 
         db.execSQL(createTableStatement);
     }
-
+    /**
+     * Called if the database version number changes
+     * Prevents previous users apps from breaking when change database design
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ HOTEL_TABLE);
         onCreate(db);
 
     }
+
+    /**
+     * Insert new hotel to hotel table
+     * @param hotelModel the hotel to add
+     * @return true if successfully inserted to database, false otherwise
+     */
 
     public boolean insertHotel(HotelModel hotelModel){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -54,6 +75,12 @@ public class HotelTable extends  SQLiteOpenHelper{
             return true;
         }
     }
+
+    /**
+     * Delete a hotel from hotel table
+     * @param hotelModel the hotel to delete
+     * @return true if successfully inserted to database, false otherwise
+     */
 
     public boolean deleteHotel(HotelModel hotelModel){
         SQLiteDatabase db = this.getWritableDatabase();

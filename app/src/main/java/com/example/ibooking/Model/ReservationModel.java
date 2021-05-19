@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /**
  * Hotel Room that stores id, HotelAddress, checkInDate, checkOutDate
  */
- */
+
 public class ReservationModel {
     private int HotelId;
     private int id;
