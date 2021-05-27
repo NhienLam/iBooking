@@ -1,5 +1,5 @@
 # iBooking - Hotel Reservation System
-An Android Application allows users to make secure hotel reservations online. <br />
+An Android Application allows users to make secure hotel reservations online.
 
 Created by:
 - Nhien Lam
